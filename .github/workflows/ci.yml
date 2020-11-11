@@ -1,0 +1,16 @@
+name: Testing
+on: 
+  push:
+    branches: [ master ]
+  pull_requerst:
+    branches: [ master ]
+
+jobs:
+  test_project:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Tests
+      run:
+      pip3 install numpy
+      python3 testing.py
