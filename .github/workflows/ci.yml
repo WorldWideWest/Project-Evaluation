@@ -12,5 +12,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run Tests
       run:
-      pip3 install numpy
-      python3 testing.py
+        pip3 install numpy
+        python3 testing.py
