@@ -24,3 +24,5 @@ class NCFTable():
         print(f"Net Value for this project: {NetValue}")
         print(f"Average Net Cash Flow for this project: {AvgNetCashFlow}")
         print(f"Average Yearly Profit Rate for this project: {AvgYrProfit}%")
+
+        return [NCF, NetValue, AvgNetCashFlow, AvgYrProfit]
