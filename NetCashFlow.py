@@ -12,20 +12,13 @@ class NCFTable():
         self.investing = investing
         self.returning = returning
 
-    def Table(self):
+    def Table(self, printDataFrame = True):
         NCF = 0
         NCF = np.sum(self.returning)
         NetValue = NCF - self.investing[0]
         AvgNetCashFlow = NCF / len(self.returning)
         AvgYrProfit = (AvgNetCashFlow / self.investing[0]) * 100
         AvgYrProfit = np.round(AvgYrProfit, 3)
-        
-        print(f"Net Cash Flow for this project: {NCF}")
-        print(f"Net Value for this project: {NetValue}")
-        print(f"Average Net Cash Flow for this project: {AvgNetCashFlow}")
-        print(f"Average Yearly Profit Rate for this project: {AvgYrProfit}%")
-
-
 
         statistics = pd.DataFrame(
             [
@@ -37,40 +30,59 @@ class NCFTable():
             columns = ['Description', 'Project']
         ) 
         
-        
-        
-        
-        
-
-        dataFrame = pd.DataFrame(columns = ['Year', 'Description', 'Project'])
-
-
-
-
-
-
+        self.dataFrame = pd.DataFrame(columns = ['Year', 'Description', 'Project'])
 
         ## Adding the investment 
         for i in range(len(self.investing)):
-            if dataFrame.empty:
-                dataFrame = dataFrame.append(
+            if self.dataFrame.empty:
+                self.dataFrame = self.dataFrame.append(
                     {'Year': i, 'Description': 'Investment', 'Project': self.investing[i]}, ignore_index=True)
             else:
                 pass
         
         ## Adding the return's
-        if not dataFrame.empty:
+        if not self.dataFrame.empty:
 
             for j in range(0, len(self.returning)):
-                dataFrame = dataFrame.append(
+                self.dataFrame = self.dataFrame.append(
                     {'Year': j+1, 'Description': 'Return', 'Project': self.returning[j]}, ignore_index=True)
 
         ## Adding the table summary        
+        self.dataFrame = self.dataFrame.append(statistics, ignore_index=True)
+        if printDataFrame == True:
+            print(self.dataFrame)
+        else:
+            pass
 
-        dataFrame = dataFrame.append(statistics, ignore_index=True)
-                
-                
-        print(dataFrame)
+        return  [NCF, NetValue, AvgNetCashFlow, AvgYrProfit]
+    
+    def OtherProjects(self, newInvestment, newReturning, printDataFrame = True):
+        i = 1
+        i += 1
+        structure = []
 
+        NCF = 0
+        NCF = np.sum(newReturning)
+        NetValue = NCF - newInvestment[0]
+        AvgNetCashFlow = NCF / len(newReturning)
+        AvgYrProfit = (AvgNetCashFlow / newInvestment[0]) * 100
+        AvgYrProfit = np.round(AvgYrProfit, 3)
+
+        statistics = [NCF, NetValue, AvgNetCashFlow, AvgYrProfit]
+
+        for j in newInvestment:
+            structure.append(j)
+        for k in newReturning:
+            structure.append(k)
+        for g in statistics:
+            structure.append(g)
+
+        self.dataFrame[f"Project {i}"] = structure 
+
+        if printDataFrame == True:
+            print(self.dataFrame)
+        else:
+            pass
+        
         return [NCF, NetValue, AvgNetCashFlow, AvgYrProfit]
 
