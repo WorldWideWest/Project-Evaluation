@@ -17,6 +17,7 @@ returning_A = np.array([1000, 2000, 3000, 4000, 5000, 6000])
 
 IT = InvestmentReturnType(investing_A, returning_A)
 CSF = NCF(investing_A, returning_A)
+CSF.Table()
 EVAL = Methods(CSF.ReturningDataFrame())
 
 class MyTests(unittest.TestCase):
