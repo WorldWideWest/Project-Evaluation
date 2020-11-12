@@ -7,10 +7,15 @@ import pandas as pd
 # END IMPORTS
 
 
-class NCFTable():
+class NCF():
     def __init__(self, investing, returning):
         self.investing = investing
         self.returning = returning
+
+
+    ## Formating 
+    pd.options.display.float_format = '{:.2f}'.format
+    ## End of Formating
 
     def Table(self, printDataFrame = True):
         NCF = 0
@@ -86,3 +91,5 @@ class NCFTable():
         
         return [NCF, NetValue, AvgNetCashFlow, AvgYrProfit]
 
+    def ReturningDataFrame(self):
+        return self.dataFrame
