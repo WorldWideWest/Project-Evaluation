@@ -6,6 +6,8 @@ import pandas as pd
 
 # END IMPORTS
 
+## PRoblems to fix
+## The other projects dataFrame does not add more then 2 cols
 
 class NCF():
     def __init__(self, investing, returning):

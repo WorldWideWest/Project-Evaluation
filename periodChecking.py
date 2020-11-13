@@ -13,20 +13,19 @@ class InvestmentReturnType():
     def CheckType(self):
         if len(self.investmentCycle) == 1 and len(self.returnCycle) == 1:
             print("Single Investment Cycle - Single Return Cycle")
-            IRType = [0, 0]
-            return IRType
+            return [0, 0]
+
         elif len(self.investmentCycle) >= 1 and len(self.returnCycle) == 1:
             print("Multiple Investment Cycle's - Single Return Cycle")
-            IRType = [1, 0]
-            return IRType
+            return [1, 0]
+
         elif len(self.investmentCycle) == 1 and len(self.returnCycle) >= 1:
             print("Single Investment Cycle - Multiple Return Cycle's")
-            IRType = [0, 1]
-            return IRType
+            return [0, 1]
+
         elif len(self.investmentCycle) >= 1 and len(self.returnCycle) >= 1:
             print("Multiple Investment Cycle's - Multiple Return Cycle's")
-            IRType = [1, 1]
-            return IRType
+            return [1, 1]
 
 
 
