@@ -4,7 +4,7 @@ import pandas as pd
 class Methods():
     def __init__(self, dataFrame):
         self.dataFrame = dataFrame
-        self.dataFrame = pd.DataFrame(self.dataFrame)
+        #self.dataFrame = pd.DataFrame(self.dataFrame)
     
     def PeriodOfReturn(self):
 
@@ -55,7 +55,7 @@ class Methods():
                     
                     difference = returnSum - array[0]
                     rateDifference = array[i] - difference
-                    period = i + (rateDifference/array[i])
+                    period = i + ((rateDifference/array[i]) - 1)
 
                     period = np.round(period, 2)                   
                     returnSum = returnSum - difference  

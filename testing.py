@@ -1,59 +1,50 @@
 ## Library's import
 
 import unittest
+from unittest.mock import patch
 
 ## File importing
-from NetCashFlow import *
-from periodChecking import *
-from evaluatingMethods import *
+from Classes.NetCashFlow import *
+from Classes.periodChecking import *
+from Classes.evaluatingMethods import *
 
 
 ## Testing Array's
-investing_A = np.array([15000])
-returning_A = np.array([1000, 2000, 3000, 4000, 5000, 6000])
+project_A = ['Project 1', 15000, 1000, 2000, 3000, 4000, 5000, 6000]
+project_B = ['Project 2', 15000, 3500, 3500, 3500, 3500, 3500, 3500]
+project_C = ['Project 3', 15000, 6000, 5000, 4000, 3000, 2000, 1000]
 
-investing_B = np.array([15000])
-returning_B = np.array([3500, 3500, 3500, 3500, 3500, 3500])
-
-investing_C = np.array([15000])
-returning_C = np.array([6000, 5000, 4000, 3000, 2000, 1000])
-
+projects = [project_A, project_B, project_C]
 ## End of testing array's
 
-investing = [investing_A, investing_B, investing_C]
-returning = [returning_A, returning_B, returning_C]
+## Class Definition's
 
+cashFlow = NCF(projects)
 
-cashFlow = NCF(investing_A, returning_A)
-cashFlow.Table(False)
-cashFlow.OtherProjects(investing_C, returning_C, False)
-
-data = cashFlow.ReturningDataFrame()
-evaluation = Methods(data)
-
+## End of Class Definition's
 
 class MyTests(unittest.TestCase):
     
     def test_investment_type(self):
         """Testing Investment Type"""
-        for i in investing:
-            for r in returning:
-                IT = InvestmentReturnType(i, r)
-                self.assertEqual(IT.CheckType(), [0, 1])
-                break
+        IRType = InvestmentReturnType(project_A)
+        check = IRType.CheckType()
+        self.assertEqual(check, [0, 1])
+        
 
     def test_NCF_Table(self):
         """Testing CSF Table"""
-        table = cashFlow.Table(printDataFrame=False)
-        self.assertEqual(table, [21000, 6000, 3500, 23.333])
-
-    def test_Other_Projects(self):
-        """Testing Adding Columns to DataFrame"""
-        self.assertEqual(cashFlow.OtherProjects(investing_C, returning_C, False), [21000, 6000, 3500, 23.333])
+        cashFlow.Table()
 
     def test_ReturnPeriod(self):
         """Testing the Period Checking"""
-        self.assertEqual(evaluation.PeriodOfReturn(), [5, 3])
+
+        dataFrame = cashFlow.Table(False)
+        evaulation = Methods(dataFrame)
+        table = evaulation.PeriodOfReturn()
+        
+        self.assertEqual(table, [5, 4.29, 3])
+
 
     if __name__ == '__main__':
         unittest.main()
