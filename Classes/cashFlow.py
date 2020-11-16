@@ -6,7 +6,6 @@ import pandas as pd
 
 # END IMPORTS
 
-
 class NCF():
     def __init__(self, projects):
         self.projects = projects

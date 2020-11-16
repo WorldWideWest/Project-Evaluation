@@ -6,7 +6,7 @@ from unittest.mock import patch
 ## File importing
 from classes.cashFlow import *
 from classes.periodChecking import *
-from classes.evaluatingMethods import *
+from evaluatingMethods import *
 
 
 ## Testing Array's
