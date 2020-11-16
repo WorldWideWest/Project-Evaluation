@@ -1,7 +1,7 @@
 import numpy as np
-from periodChecking import *
-from NetCashFlow import *
-from evaluatingMethods import *
+from classes.periodChecking import *
+from classes.cashFlow import *
+from classes.evaluatingMethods import *
 
 
 print("Welcome to the Investment Project effciency Rating's\n")

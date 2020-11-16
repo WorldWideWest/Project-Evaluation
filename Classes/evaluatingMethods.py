@@ -1,34 +1,34 @@
+## Library's import
+
 import numpy as np
 import pandas as pd
+import os
+
+## End of Library's import
+
+## Classes import
+
+from ..classes.support.parsing import Parsing
+
+## End of Classes import
+
 
 class Methods():
     def __init__(self, dataFrame):
         self.dataFrame = dataFrame
-        #self.dataFrame = pd.DataFrame(self.dataFrame)
+        self.dataFrame = pd.DataFrame(self.dataFrame)
     
+
     def PeriodOfReturn(self):
+        # parser = Parsing(self.dataFrame)
+        # periodDataFrame = parser.Parse()
 
-        # PARSING THE DATAFRAME
-
-        periodDataFrame = self.dataFrame
-
-        ## Droping worthless columns
-        periodDataFrame = periodDataFrame.drop(["Year", "Description"], axis = 1)
-        periodDataFrame = periodDataFrame.drop(
-            [
-                periodDataFrame.index[-4],
-                periodDataFrame.index[-3],
-                periodDataFrame.index[-2],
-                periodDataFrame.index[-1]
-            ]
-        )
 
         i = 0
         returnSum = 0
         periodsTable = []
 
-        
-
+    
         table = pd.DataFrame(
             {
                 "Project Name": [],

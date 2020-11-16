@@ -4,9 +4,9 @@ import unittest
 from unittest.mock import patch
 
 ## File importing
-from Classes.NetCashFlow import *
-from Classes.periodChecking import *
-from Classes.evaluatingMethods import *
+from classes.cashFlow import *
+from classes.periodChecking import *
+from classes.evaluatingMethods import *
 
 
 ## Testing Array's
