@@ -7,8 +7,8 @@ import pandas as pd
 
 ## Classes import
 
-from classes.support.FinancialTable import *
-from classes.support.parsing import *
+from FinancialTable import *
+from parsing import *
 
 ## End of Classes import
 
