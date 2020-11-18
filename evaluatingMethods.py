@@ -26,37 +26,45 @@ class Methods():
         periodCheck = parser.PeriodChecking(periodDataFrame, True)
         return periodCheck
 
-    def DiscountedPeriodOfReturn(self, interestRate):
+    def DiscountedPeriodOfReturn(self, interestRate, printDataFrame = True, periodChecking = True):
        #pd.options.display.float_format = '{:.15f}'.format
         parser = Parser(self.dataFrame)
-        source = parser.Parse(dropCols=["Description"], printDataFrame=False)
+        fullDataFrame = parser.Parse(dropCols=["Description"], printDataFrame=False)
 
         values = [1]
         finance = Factor()
+        discountDF = pd.DataFrame()
 
-        for i in range(1, len(source['Year'])):
+
+        for i in range(1, len(fullDataFrame['Year'])):
             rate = finance.II(interestRate, i)
             values.append(rate)
         
-        source.insert(1, f"Discount Factor ({interestRate})", values)
+        fullDataFrame.insert(1, f"Discount Factor ({interestRate})", values)
 
-        for col in source.columns:
+        for col in fullDataFrame.columns:
             if col == "Year" or col == f"Discount Factor ({interestRate})":
                 pass
             else:
-                source[f"{col} Discounted"] = source[f"Discount Factor ({interestRate})"] * source[col]
+                fullDataFrame[f"{col} Discounted"] = fullDataFrame[f"Discount Factor ({interestRate})"] * fullDataFrame[col]
+                discountDF[f"{col} Discounted"] = fullDataFrame[f"Discount Factor ({interestRate})"] * fullDataFrame[col]
+        
 
-        print(source)
+        if periodChecking == True:
+            periodCheck = parser.PeriodChecking(discountDF, printDataFrame=True)
+            print(periodCheck)
+        else:
+            pass
+
+        if printDataFrame == True:
+            print(fullDataFrame)
+            return fullDataFrame
+        else:
+            return fullDataFrame
+        
+
+        
             
             
-
-
-
-
-
-
-
-
-
 
 

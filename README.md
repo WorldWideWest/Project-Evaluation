@@ -4,8 +4,6 @@
 * [General-Info](#general-info)
 * [Techonologies](#technologies)
 
-
-
 ## General Info
 
 The project is based on Financial Mathematics and Business Finance and is there to automate the tasks of getting the right information about the Investment Project Info. 
@@ -15,8 +13,8 @@ I. The first part of the project
 First thing in this part is to crate a scalable table (pandas dataFrame), which will contain all the nececary data for the further processe's.
 
 That include's getting the information:
-1. Period of return 
-2. Discounted period of return
+1. Period of return    ✅
+2. Discounted period of return ✅
 3. Net Present Value (NPV)
 4. Internal rate of return (IRR)
 5. Profitability Index (PI)
