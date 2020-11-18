@@ -7,8 +7,8 @@ import pandas as pd
 
 ## Classes import
 
-from classes.support.parsing import Parser
-from classes.support.FinancialTable import Factor, Values
+from classes.support.FinancialTable import *
+from classes.support.parsing import *
 
 ## End of Classes import
 

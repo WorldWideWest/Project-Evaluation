@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import patch
 
 ## File importing
-from classes.cashFlow import NCF
+from classes.cashFlow import *
 from classes.periodChecking import *
 from evaluatingMethods import *
 
