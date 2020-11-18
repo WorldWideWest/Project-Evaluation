@@ -31,7 +31,6 @@ class MyTests(unittest.TestCase):
         check = IRType.CheckType()
         self.assertEqual(check, [0, 1])
         
-
     def test_NCF_Table(self):
         """Testing CSF Table"""
         cashFlow.Table()
@@ -44,6 +43,11 @@ class MyTests(unittest.TestCase):
         table = evaulation.PeriodOfReturn()
         
         self.assertEqual(table, [5, 4.29, 3])
+
+    def test_discounted_Period_OF_Return(self):
+        dataFrame = cashFlow.Table(False)
+        evaulation = Methods(dataFrame)
+        evaulation.DiscountedPeriodOfReturn(5)
 
 
     if __name__ == '__main__':

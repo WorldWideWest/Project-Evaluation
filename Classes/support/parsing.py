@@ -35,6 +35,10 @@ class Parser():
             }
         )
 
+        if 'Year' in periodDataFrame.columns:
+            periodDataFrame = periodDataFrame.drop(['Year'], axis = 1)
+        elif 'Description' in periodDataFrame.columns:
+            periodDataFrame = periodDataFrame.drop(['Description'], axis = 1)
         for project in periodDataFrame:
 
             returnSum = 0
