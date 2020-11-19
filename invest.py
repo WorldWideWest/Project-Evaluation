@@ -49,7 +49,7 @@ while (task.title() == "Yes"):
 
         if rate.title() == "Yes":
             print("You chosed see the Discounted Period of Return\n")
-            evaluation.DiscountedPeriodOfReturn(interestRate=interest, printDataFrame=True, periodChecking=True)
+            evaluation.NetPresentValue(interestRate=interest, printDataFrame=True, periodChecking=True)
 
 
 

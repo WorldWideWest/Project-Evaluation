@@ -26,7 +26,7 @@ class Methods():
         periodCheck = parser.PeriodChecking(periodDataFrame, True)
         return periodCheck
 
-    def DiscountedPeriodOfReturn(self, interestRate, printDataFrame = True, periodChecking = True):
+    def NetPresentValue(self, interestRate, printDataFrame = True, periodChecking = True):
        #pd.options.display.float_format = '{:.15f}'.format
         parser = Parser(self.dataFrame)
         fullDataFrame = parser.Parse(dropCols=["Description"], printDataFrame=False)
@@ -47,21 +47,40 @@ class Methods():
                 pass
             else:
                 fullDataFrame[f"{col} Discounted"] = fullDataFrame[f"Discount Factor ({interestRate})"] * fullDataFrame[col]
+                
+                ## Period Checking dataFrame
                 discountDF[f"{col} Discounted"] = fullDataFrame[f"Discount Factor ({interestRate})"] * fullDataFrame[col]
         
+        
+        totalData = ["NaN", "TOTAL"]
+        
+        for col in range(2, len(fullDataFrame.columns)):
+            total = 0
+            total = fullDataFrame.iloc[1:, col].sum()
+            totalData.append(total)
+
+        totalDF = pd.DataFrame(columns = fullDataFrame.columns,
+                               data = [totalData])
+        
+        fullDataFrame = fullDataFrame.append(totalDF)
 
         if periodChecking == True:
             periodCheck = parser.PeriodChecking(discountDF, printDataFrame=True)
             print(periodCheck)
         else:
             pass
+        
+        self.fullDataFrame = fullDataFrame
 
         if printDataFrame == True:
             print(fullDataFrame)
-            return fullDataFrame
+            return self.fullDataFrame, periodCheck
         else:
-            return fullDataFrame
+            return self.fullDataFrame, periodCheck
+    
+
         
+
 
         
             

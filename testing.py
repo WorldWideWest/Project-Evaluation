@@ -47,7 +47,8 @@ class MyTests(unittest.TestCase):
     def test_discounted_Period_OF_Return(self):
         dataFrame = cashFlow.Table(False)
         evaulation = Methods(dataFrame)
-        evaulation.DiscountedPeriodOfReturn(5)
+        check = evaulation.NetPresentValue(5)
+        self.assertEqual(check[1], [5.54, 4.94, 3.52])
 
 
     if __name__ == '__main__':
