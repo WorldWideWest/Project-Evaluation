@@ -15,7 +15,7 @@ First thing in this part is to crate a scalable table (pandas dataFrame), which 
 That include's getting the information:
 1. Period of return    ✅
 2. Discounted period of return ✅
-3. Net Present Value (NPV)
+3. Net Present Value (NPV)  ✅
 4. Internal rate of return (IRR)
 5. Profitability Index (PI)
 6. Method of annuity

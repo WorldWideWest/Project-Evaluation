@@ -53,16 +53,28 @@ class Methods():
         
         
         totalData = ["NaN", "TOTAL"]
+        NPVData = ["NaN", "Net Present Value"]
         
         for col in range(2, len(fullDataFrame.columns)):
             total = 0
             total = fullDataFrame.iloc[1:, col].sum()
             totalData.append(total)
 
+            if 'Discounted' in fullDataFrame.columns[col]:
+                NPV = total - fullDataFrame.iloc[0, col]
+                NPVData.append(NPV)
+
+            else:
+                NPVData.append("-")
+
         totalDF = pd.DataFrame(columns = fullDataFrame.columns,
                                data = [totalData])
-        
+
+        NPVDF = pd.DataFrame(columns = fullDataFrame.columns,
+                             data = [NPVData])
+
         fullDataFrame = fullDataFrame.append(totalDF)
+        fullDataFrame = fullDataFrame.append(NPVDF)
 
         if periodChecking == True:
             periodCheck = parser.PeriodChecking(discountDF, printDataFrame=True)
@@ -77,13 +89,3 @@ class Methods():
             return self.fullDataFrame, periodCheck
         else:
             return self.fullDataFrame, periodCheck
-    
-
-        
-
-
-        
-            
-            
-
-
