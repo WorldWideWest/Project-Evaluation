@@ -49,6 +49,11 @@ class MyTests(unittest.TestCase):
         evaulation = Methods(dataFrame)
         check = evaulation.NetPresentValue(5)
         self.assertEqual(check[1], [5.54, 4.94, 3.52])
+    
+    def test_IRR(self):
+        dataFrame = cashFlow.Table(False)
+        evaulation = Methods(dataFrame)
+        evaulation.InternalReturnRate()
 
 
     if __name__ == '__main__':

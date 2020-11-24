@@ -89,3 +89,54 @@ class Methods():
             return self.fullDataFrame, periodCheck
         else:
             return self.fullDataFrame, periodCheck
+
+    def InternalReturnRate(self, discountRates = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45]):
+        
+        finance = Values()
+        parser = Parser(self.dataFrame)
+        parsedDataFrame = parser.Parse(dropCols=["Description"], printDataFrame=False)    
+
+        preparedValues = []
+
+        for rate in discountRates:
+            totals = []
+            if rate == 0:
+                totals.append(rate)
+
+                for col in range(1, len(parsedDataFrame.columns)):
+                    total = 0
+                    total = parsedDataFrame.iloc[1:, col].sum()
+                    totals.append(total)
+
+                for col in range(1, len(parsedDataFrame.columns)):
+                    for val in range(1, len(totals)):
+                        difference = 0
+                        difference = totals[val] - parsedDataFrame.iloc[0, col]
+                        totals.append(difference)
+                        break
+                preparedValues.append(totals)
+            else:
+                
+                totals.clear()
+                totals.append(rate)
+
+                for col in range(1, parsedDataFrame.shape[1]):
+                    discuntedSum = 0
+                    for row in range(1, parsedDataFrame.shape[0]):
+                        value = 0
+                        value = finance.II(parsedDataFrame.iloc[row, col], rate, row)
+                        discuntedSum += value
+                        
+                        if row == (parsedDataFrame.shape[0] - 1) :
+                            totals.append(discuntedSum)
+                            # preparedValues.append(totals)
+                            print(totals)
+                        
+                        
+                        
+
+
+
+        print(preparedValues)
+
+          
