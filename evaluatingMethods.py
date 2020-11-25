@@ -3,8 +3,14 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import seaborn as sns
 # End of Library's import
+
+## Setting the options
+
+sns.set()
+
+## End of options
 
 # Classes import
 
@@ -150,12 +156,10 @@ class Methods():
                     totals.append(item)
                 preparedValues.append(totals)
 
-        # for vals in preparedValues:
-        #     print(vals)
-
         # Creating DataFrame for the IRR values
 
         columns = ['Discount Rate']
+        visualization = []
 
         for col in range(1, len(parsedDataFrame.columns)):
             column = f'{parsedDataFrame.columns[col]} CVCF'
@@ -164,6 +168,7 @@ class Methods():
         for col in range(1, len(parsedDataFrame.columns)):
             column = f'{parsedDataFrame.columns[col]} NPV'
             columns.append(column)
+            visualization.append(column)
 
         irrDataFrame = pd.DataFrame(
             columns=columns,
@@ -172,6 +177,8 @@ class Methods():
         print("CVCF - Current Value of the Cash flow\nNPV - Net Present Value")
         print(irrDataFrame)
 
-        plt.figure(figsize=(10, 6))
-        plt.plot(irrDataFrame['Project 1 CVCF'])
+        plt.figure(figsize = (10, 8))
+        plt.plot(irrDataFrame[visualization], label = visualization)
+        plt.xlabel("Rate")
+        plt.ylabel("Cash Flow")
         plt.show()
