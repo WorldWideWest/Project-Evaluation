@@ -153,7 +153,7 @@ class Methods():
         # for vals in preparedValues:
         #     print(vals)
 
-        ## Creating DataFrame for the IRR values
+        # Creating DataFrame for the IRR values
 
         columns = ['Discount Rate']
 
@@ -166,12 +166,12 @@ class Methods():
             columns.append(column)
 
         irrDataFrame = pd.DataFrame(
-            columns = columns,
-            data = preparedValues
+            columns=columns,
+            data=preparedValues
         )
         print("CVCF - Current Value of the Cash flow\nNPV - Net Present Value")
         print(irrDataFrame)
 
-        plt.figure(figsize = (10, 6))
+        plt.figure(figsize=(10, 6))
         plt.plot(irrDataFrame['Project 1 CVCF'])
         plt.show()
