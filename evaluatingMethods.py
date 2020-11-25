@@ -100,6 +100,7 @@ class Methods():
 
         for rate in discountRates:
             totals = []
+            differences = []
             if rate == 0:
                 totals.append(rate)
 
@@ -112,11 +113,14 @@ class Methods():
                     for val in range(1, len(totals)):
                         difference = 0
                         difference = totals[val] - parsedDataFrame.iloc[0, col]
-                        totals.append(difference)
+                        differences.append(difference)
                         break
+                
+                for item in differences:
+                    totals.append(item)
                 preparedValues.append(totals)
             else:
-                
+                differences.clear()
                 totals.clear()
                 totals.append(rate)
 
@@ -127,16 +131,21 @@ class Methods():
                         value = finance.II(parsedDataFrame.iloc[row, col], rate, row)
                         discuntedSum += value
                         
-                        if row == (parsedDataFrame.shape[0] - 1) :
+                        if row == (parsedDataFrame.shape[0] - 1):
                             totals.append(discuntedSum)
-                            # preparedValues.append(totals)
-                            print(totals)
-                        
-                        
-                        
 
+                for val in range(1, len(totals)):
+                    for col in range(1, len(parsedDataFrame.columns)): 
+                        difference = 0
+                        difference = totals[val] - parsedDataFrame.iloc[0, col]
+                        differences.append(difference)
+                        break
+                        
+                for item in differences:
+                    totals.append(item)
+                preparedValues.append(totals)
 
-
-        print(preparedValues)
+        for vals in preparedValues:
+            print(vals)
 
           
