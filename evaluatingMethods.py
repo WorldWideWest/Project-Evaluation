@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+
 # End of Library's import
 
 ## Setting the options
@@ -177,8 +178,12 @@ class Methods():
         print("CVCF - Current Value of the Cash flow\nNPV - Net Present Value")
         print(irrDataFrame)
 
-        plt.figure(figsize = (10, 8))
-        plt.plot(irrDataFrame[visualization], label = visualization)
-        plt.xlabel("Rate")
-        plt.ylabel("Cash Flow")
+        sns.set_style("whitegrid")
+        fig = plt.figure()
+        ax = fig.add_subplot(1, 1, 1)
+        
+        ax.spines["bottom"].set_position(("data", 0.0))
+        ax.spines["bottom"].set_color("black")
+        
+        plt.plot(irrDataFrame["Discount Rate"], irrDataFrame[visualization])
         plt.show()
