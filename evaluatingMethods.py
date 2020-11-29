@@ -1,5 +1,7 @@
 # Library's import
 
+from parsing import *
+from FinancialTable import *
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -7,16 +9,14 @@ import seaborn as sns
 
 # End of Library's import
 
-## Setting the options
+# Setting the options
 
 sns.set()
 
-## End of options
+# End of options
 
 # Classes import
 
-from FinancialTable import *
-from parsing import *
 
 # End of Classes import
 
@@ -100,7 +100,7 @@ class Methods():
         else:
             return self.fullDataFrame, periodCheck
 
-    def InternalReturnRate(self, discountRates=[0, 5, 10, 15, 20, 25, 30, 35, 40, 45]):
+    def InternalReturnRate(self, discountRates=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]):
 
         finance = Values()
         parser = Parser(self.dataFrame)
@@ -178,12 +178,48 @@ class Methods():
         print("CVCF - Current Value of the Cash flow\nNPV - Net Present Value")
         print(irrDataFrame)
 
+        # Visualizing the content of the irrDataFrame
+
         sns.set_style("whitegrid")
-        fig = plt.figure()
+        fig = plt.figure(figsize=(10, 8))
         ax = fig.add_subplot(1, 1, 1)
-        
+
         ax.spines["bottom"].set_position(("data", 0.0))
         ax.spines["bottom"].set_color("black")
-        
+
         plt.plot(irrDataFrame["Discount Rate"], irrDataFrame[visualization])
         plt.show()
+
+        # End of Visualizationsa
+
+        IRRates = []
+        IRRColumns = []
+        IRRDF = pd.DataFrame(columns=["Project", "IRR"])
+        
+
+        for col in irrDataFrame.columns:
+            if "NPV" in col:
+                npv_1, npv_2 = 0, 0
+                irr_1, irr_2 = 0, 0
+                IRR = 0
+                for i in range(len(irrDataFrame[col])):
+                    if irrDataFrame.at[i, col] < 0:
+                        npv_2 = irrDataFrame.at[i, col]
+                        npv_1 = irrDataFrame.at[i-1, col]
+
+                        irr_2 = irrDataFrame.at[i, "Discount Rate"]
+                        irr_1 = irrDataFrame.at[i-1, "Discount Rate"]
+
+                        IRR = irr_1 + ((irr_2 - irr_1) / (npv_2 - npv_1)) * (0 - npv_1)
+                
+                        IRRDF = IRRDF.append({"Project":col, "IRR": IRR}, ignore_index=True)
+                        break
+
+        
+        
+        for col in IRRColumns:
+            irr = 0
+            for irr in IRRates:
+                IRRDF[col] = irr
+                break
+        print(IRRDF)
