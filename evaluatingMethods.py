@@ -85,13 +85,14 @@ class Methods():
         NPVDF = pd.DataFrame(columns=fullDataFrame.columns,
                              data=[NPVData])
 
-        ## PROFITABILITY INDEX
+        # PROFITABILITY INDEX
         PIDF = pd.DataFrame(columns=fullDataFrame.columns,
-                             data=[PIData])
+                            data=[PIData])
 
         fullDataFrame = fullDataFrame.append(totalDF)
         fullDataFrame = fullDataFrame.append(NPVDF)
-        fullDataFrame = fullDataFrame.append(PIDF) ## APPENDING PROFITABILITY INDEX
+        fullDataFrame = fullDataFrame.append(
+            PIDF)  # APPENDING PROFITABILITY INDEX
 
         if periodChecking == True:
             periodCheck = parser.PeriodChecking(
@@ -230,5 +231,3 @@ class Methods():
             return IRRDF
         else:
             return IRRDF
-
-        
