@@ -175,8 +175,6 @@ class Methods():
             columns=columns,
             data=preparedValues
         )
-        
-        
 
         # Visualizing the content of the irrDataFrame
         if showVisualization == True:
@@ -187,7 +185,8 @@ class Methods():
             ax.spines["bottom"].set_position(("data", 0.0))
             ax.spines["bottom"].set_color("black")
 
-            plt.plot(irrDataFrame["Discount Rate"], irrDataFrame[visualization])
+            plt.plot(irrDataFrame["Discount Rate"],
+                     irrDataFrame[visualization])
             plt.show()
         else:
             pass
@@ -217,14 +216,9 @@ class Methods():
                             {"Project": col, "IRR": IRR}, ignore_index=True)
                         break
 
-
         if printDataFrame == True:
             print("CVCF - Current Value of the Cash flow\nNPV - Net Present Value")
             print(irrDataFrame)
             return IRRDF
         else:
             return IRRDF
-        
-
-        
-

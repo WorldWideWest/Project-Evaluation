@@ -54,7 +54,10 @@ class MyTests(unittest.TestCase):
     def test_IRR(self):
         dataFrame = cashFlow.Table(False)
         evaulation = Methods(dataFrame)
-        evaulation.InternalReturnRate()
+        IRR = evaulation.InternalReturnRate(
+            discountRates=[5, 10, 15, 20], printDataFrame=False, showVisualization=False)
+        self.assertEqual(list(IRR.iloc[:, 1]), [8.401320039839792, 10.609224716728805, 14.31470908026346])
 
     if __name__ == '__main__':
         unittest.main()
+ 
