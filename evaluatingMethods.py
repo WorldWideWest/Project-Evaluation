@@ -39,15 +39,21 @@ class Methods():
         parser = Parser(self.dataFrame)
         fullDataFrame = parser.Parse(
             dropCols=["Description"], printDataFrame=False)
+        
 
         values = [1]
         finance = Factor()
         discountDF = pd.DataFrame()
+        a = 0 ## Variable for the annuity method
+        
 
         for i in range(1, len(fullDataFrame['Year'])):
             rate = finance.II(interestRate, i)
             values.append(rate)
+            if i == len(fullDataFrame['Year']) - 1:
+                a = 1 / finance.IV(interestRate, i)
 
+        
         fullDataFrame.insert(1, f"Discount Factor ({interestRate})", values)
 
         for col in fullDataFrame.columns:
@@ -64,6 +70,7 @@ class Methods():
         totalData = ["NaN", "TOTAL"]
         NPVData = ["NaN", "Net Present Value"]
         PIData = ["NaN", "Profitability index"]
+        ANN = ["NaN", "Annuity Method"]
 
         for col in range(2, len(fullDataFrame.columns)):
             total = 0
@@ -73,12 +80,16 @@ class Methods():
             if 'Discounted' in fullDataFrame.columns[col]:
                 NPV = total - fullDataFrame.iloc[0, col]
                 PI = total / fullDataFrame.iloc[0, col]
+                A = a * fullDataFrame.iloc[0, col]
+                ANNT = a * total
+                
                 NPVData.append(NPV)
                 PIData.append(PI)
+                ANN.append(ANNT)
             else:
                 NPVData.append("-")
                 PIData.append("-")
-
+                ANN.append("-")
         totalDF = pd.DataFrame(columns=fullDataFrame.columns,
                                data=[totalData])
 
@@ -88,11 +99,17 @@ class Methods():
         # PROFITABILITY INDEX
         PIDF = pd.DataFrame(columns=fullDataFrame.columns,
                             data=[PIData])
+        
+         # ANNUITY METHOD
+        ANNDF = pd.DataFrame(columns=fullDataFrame.columns,
+                            data=[ANN])
+
+        
 
         fullDataFrame = fullDataFrame.append(totalDF)
         fullDataFrame = fullDataFrame.append(NPVDF)
-        fullDataFrame = fullDataFrame.append(
-            PIDF)  # APPENDING PROFITABILITY INDEX
+        fullDataFrame = fullDataFrame.append(PIDF)  # APPENDING PROFITABILITY INDEX
+        fullDataFrame = fullDataFrame.append(ANNDF)  # APPENDING ANNUITY METHOD
 
         if periodChecking == True:
             periodCheck = parser.PeriodChecking(
