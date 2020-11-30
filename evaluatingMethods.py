@@ -100,7 +100,7 @@ class Methods():
         else:
             return self.fullDataFrame, periodCheck
 
-    def InternalReturnRate(self, discountRates=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]):
+    def InternalReturnRate(self, discountRates=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], printDataFrame=True, showVisualization=True):
 
         finance = Values()
         parser = Parser(self.dataFrame)
@@ -175,27 +175,27 @@ class Methods():
             columns=columns,
             data=preparedValues
         )
-        print("CVCF - Current Value of the Cash flow\nNPV - Net Present Value")
-        print(irrDataFrame)
+        
+        
 
         # Visualizing the content of the irrDataFrame
+        if showVisualization == True:
+            sns.set_style("whitegrid")
+            fig = plt.figure(figsize=(10, 8))
+            ax = fig.add_subplot(1, 1, 1)
 
-        sns.set_style("whitegrid")
-        fig = plt.figure(figsize=(10, 8))
-        ax = fig.add_subplot(1, 1, 1)
+            ax.spines["bottom"].set_position(("data", 0.0))
+            ax.spines["bottom"].set_color("black")
 
-        ax.spines["bottom"].set_position(("data", 0.0))
-        ax.spines["bottom"].set_color("black")
-
-        plt.plot(irrDataFrame["Discount Rate"], irrDataFrame[visualization])
-        plt.show()
-
+            plt.plot(irrDataFrame["Discount Rate"], irrDataFrame[visualization])
+            plt.show()
+        else:
+            pass
         # End of Visualizationsa
 
         IRRates = []
         IRRColumns = []
         IRRDF = pd.DataFrame(columns=["Project", "IRR"])
-        
 
         for col in irrDataFrame.columns:
             if "NPV" in col:
@@ -210,16 +210,21 @@ class Methods():
                         irr_2 = irrDataFrame.at[i, "Discount Rate"]
                         irr_1 = irrDataFrame.at[i-1, "Discount Rate"]
 
-                        IRR = irr_1 + ((irr_2 - irr_1) / (npv_2 - npv_1)) * (0 - npv_1)
-                
-                        IRRDF = IRRDF.append({"Project":col, "IRR": IRR}, ignore_index=True)
+                        IRR = irr_1 + ((irr_2 - irr_1) /
+                                       (npv_2 - npv_1)) * (0 - npv_1)
+
+                        IRRDF = IRRDF.append(
+                            {"Project": col, "IRR": IRR}, ignore_index=True)
                         break
 
+
+        if printDataFrame == True:
+            print("CVCF - Current Value of the Cash flow\nNPV - Net Present Value")
+            print(irrDataFrame)
+            return IRRDF
+        else:
+            return IRRDF
         
+
         
-        for col in IRRColumns:
-            irr = 0
-            for irr in IRRates:
-                IRRDF[col] = irr
-                break
-        print(IRRDF)
+
