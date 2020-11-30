@@ -63,6 +63,7 @@ class Methods():
 
         totalData = ["NaN", "TOTAL"]
         NPVData = ["NaN", "Net Present Value"]
+        PIData = ["NaN", "Profitability index"]
 
         for col in range(2, len(fullDataFrame.columns)):
             total = 0
@@ -71,10 +72,12 @@ class Methods():
 
             if 'Discounted' in fullDataFrame.columns[col]:
                 NPV = total - fullDataFrame.iloc[0, col]
+                PI = total / fullDataFrame.iloc[0, col]
                 NPVData.append(NPV)
-
+                PIData.append(PI)
             else:
                 NPVData.append("-")
+                PIData.append("-")
 
         totalDF = pd.DataFrame(columns=fullDataFrame.columns,
                                data=[totalData])
@@ -82,8 +85,13 @@ class Methods():
         NPVDF = pd.DataFrame(columns=fullDataFrame.columns,
                              data=[NPVData])
 
+        ## PROFITABILITY INDEX
+        PIDF = pd.DataFrame(columns=fullDataFrame.columns,
+                             data=[PIData])
+
         fullDataFrame = fullDataFrame.append(totalDF)
         fullDataFrame = fullDataFrame.append(NPVDF)
+        fullDataFrame = fullDataFrame.append(PIDF) ## APPENDING PROFITABILITY INDEX
 
         if periodChecking == True:
             periodCheck = parser.PeriodChecking(
@@ -222,3 +230,5 @@ class Methods():
             return IRRDF
         else:
             return IRRDF
+
+        

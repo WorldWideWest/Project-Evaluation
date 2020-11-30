@@ -16,8 +16,8 @@ That include's getting the information:
 1. Period of return    ✅
 2. Discounted period of return ✅
 3. Net Present Value (NPV)  ✅
-4. Internal rate of return (IRR)
-5. Profitability Index (PI)
+4. Internal rate of return (IRR) ✅
+5. Profitability Index (PI) ✅
 6. Method of annuity
 
 This part of the project will be based on CLI (Command Line Interface), once all of the funcionality wokr's without a problem will continue to the next part of the project.
