@@ -13,12 +13,51 @@ I. The first part of the project
 First thing in this part is to crate a scalable table (pandas dataFrame), which will contain all the nececary data for the further processe's.
 
 That include's getting the information:
-1. Period of return    ✅
-2. Discounted period of return ✅
-3. Net Present Value (NPV)  ✅
-4. Internal rate of return (IRR) ✅
-5. Profitability Index (PI) ✅
-6. Method of annuity
+
+
+<table>
+    <thead>
+        <tr>
+            <td>Number</td>
+            <td>Task</td>
+            <td>Status</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1.</td>
+            <td>Period of return</td>
+            <td>✅</td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td>Discounted period of return</td>
+            <td>✅</td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td>Net Present Value (NPV)</td>
+            <td>✅</td>
+        </tr>
+        <tr>
+            <td>4.</td>
+            <td>Internal rate of return (IRR)</td>
+            <td>✅</td>
+        </tr>
+        <tr>
+            <td>5.</td>
+            <td>Profitability Index (PI)</td>
+            <td>✅</td>
+        </tr>
+        <tr>
+            <td>6.</td>
+            <td>Method of annuity</td>
+            <td>✅</td>
+        </tr>
+    </tbody>
+</table>
+
+
 
 This part of the project will be based on CLI (Command Line Interface), once all of the funcionality wokr's without a problem will continue to the next part of the project.
 
