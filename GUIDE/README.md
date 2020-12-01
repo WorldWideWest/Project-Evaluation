@@ -83,7 +83,7 @@ Like in the preavious function call we can assign two variables because we get t
 
 The first return is a table wich is a baseline for the graph where we represent the Net present value's.
 
-<img src="images/irrflow.png">
+<img src="images/irrFlow.png">
 
 We can represent this table with a graph wich gives us a better representation what is our IRR.
 
