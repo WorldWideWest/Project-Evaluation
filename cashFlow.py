@@ -74,11 +74,9 @@ class NCF():
 
                 self.testingFrame.append([cashFlow, netValue, avgCashFlow, avgYrProfit])
         
-        if printDataFrame == True:
-            print(self.dataFrame)
-            return self.dataFrame
-        else:
-            return self.dataFrame
+ 
+        return self.dataFrame
+
 
 
         

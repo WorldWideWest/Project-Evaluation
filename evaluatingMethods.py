@@ -12,16 +12,10 @@ import seaborn as sns
 # Setting the options
 
 sns.set()
+#pd.options.display.float_format = '${:,.14f}'.format
 
 # End of options
 
-# Classes import
-
-
-# End of Classes import
-
-
-#pd.options.display.float_format = '${:,.14f}'.format
 class Methods():
     def __init__(self, dataFrame):
         self.dataFrame = dataFrame
@@ -39,13 +33,11 @@ class Methods():
         parser = Parser(self.dataFrame)
         fullDataFrame = parser.Parse(
             dropCols=["Description"], printDataFrame=False)
-        
 
         values = [1]
         finance = Factor()
         discountDF = pd.DataFrame()
-        a = 0 ## Variable for the annuity method
-        
+        a = 0  # Variable for the annuity method
 
         for i in range(1, len(fullDataFrame['Year'])):
             rate = finance.II(interestRate, i)
@@ -53,7 +45,6 @@ class Methods():
             if i == len(fullDataFrame['Year']) - 1:
                 a = 1 / finance.IV(interestRate, i)
 
-        
         fullDataFrame.insert(1, f"Discount Factor ({interestRate})", values)
 
         for col in fullDataFrame.columns:
@@ -82,7 +73,7 @@ class Methods():
                 PI = total / fullDataFrame.iloc[0, col]
                 A = a * fullDataFrame.iloc[0, col]
                 ANNT = a * total
-                
+
                 NPVData.append(NPV)
                 PIData.append(PI)
                 ANN.append(ANNT)
@@ -90,6 +81,7 @@ class Methods():
                 NPVData.append("-")
                 PIData.append("-")
                 ANN.append("-")
+                
         totalDF = pd.DataFrame(columns=fullDataFrame.columns,
                                data=[totalData])
 
@@ -99,34 +91,28 @@ class Methods():
         # PROFITABILITY INDEX
         PIDF = pd.DataFrame(columns=fullDataFrame.columns,
                             data=[PIData])
-        
-         # ANNUITY METHOD
-        ANNDF = pd.DataFrame(columns=fullDataFrame.columns,
-                            data=[ANN])
 
-        
+        # ANNUITY METHOD
+        ANNDF = pd.DataFrame(columns=fullDataFrame.columns,
+                             data=[ANN])
 
         fullDataFrame = fullDataFrame.append(totalDF)
         fullDataFrame = fullDataFrame.append(NPVDF)
         fullDataFrame = fullDataFrame.append(PIDF)  # APPENDING PROFITABILITY INDEX
         fullDataFrame = fullDataFrame.append(ANNDF)  # APPENDING ANNUITY METHOD
 
-        if periodChecking == True:
-            periodCheck = parser.PeriodChecking(
-                discountDF, printDataFrame=True)
-            print(periodCheck)
-        else:
-            pass
-
         self.fullDataFrame = fullDataFrame
 
-        if printDataFrame == True:
-            print(fullDataFrame)
-            return self.fullDataFrame, periodCheck
+        periodCheck = 0
+        
+        if periodChecking == True:
+            periodCheck = parser.PeriodChecking(
+                discountDF, printDataFrame=False)
+            return self.fullDataFrame, periodCheck[1]
         else:
-            return self.fullDataFrame, periodCheck
+            return self.fullDataFrame
 
-    def InternalReturnRate(self, discountRates=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], printDataFrame=True, showVisualization=True):
+    def InternalReturnRate(self, discountRates=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], showVisualization=True):
 
         finance = Values()
         parser = Parser(self.dataFrame)
@@ -213,6 +199,11 @@ class Methods():
 
             plt.plot(irrDataFrame["Discount Rate"],
                      irrDataFrame[visualization])
+            
+            plt.title("Internal Return Rate for all project's", fontsize=14, fontweight="bold")
+            plt.xlabel("Discount Rate (%)", fontsize=12)
+            plt.ylabel("NPV", fontsize=12)
+            plt.legend(irrDataFrame[visualization])
             plt.show()
         else:
             pass
@@ -242,9 +233,5 @@ class Methods():
                             {"Project": col, "IRR": IRR}, ignore_index=True)
                         break
 
-        if printDataFrame == True:
-            print("CVCF - Current Value of the Cash flow\nNPV - Net Present Value")
-            print(irrDataFrame)
-            return IRRDF
-        else:
-            return IRRDF
+        print("CVCF - Current Value of the Cash flow\nNPV - Net Present Value")
+        return irrDataFrame, IRRDF

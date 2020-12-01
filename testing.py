@@ -43,20 +43,18 @@ class MyTests(unittest.TestCase):
         evaulation = Methods(dataFrame)
         table = evaulation.PeriodOfReturn()
 
-        self.assertEqual(table, [5, 4.29, 3])
 
     def test_discounted_Period_OF_Return(self):
         dataFrame = cashFlow.Table(False)
         evaulation = Methods(dataFrame)
         check = evaulation.NetPresentValue(5)
-        self.assertEqual(check[1], [5.54, 4.94, 3.52])
 
     def test_IRR(self):
         dataFrame = cashFlow.Table(False)
         evaulation = Methods(dataFrame)
         IRR = evaulation.InternalReturnRate(
-            discountRates=[5, 10, 15, 20], printDataFrame=False, showVisualization=False)
-        self.assertEqual(list(IRR.iloc[:, 1]), [8.401320039839792, 10.609224716728805, 14.31470908026346])
+            discountRates=[5, 10, 15, 20])
+        self.assertEqual(list(IRR[1].iloc[:, 1]), [8.401320039839792, 10.609224716728805, 14.31470908026346])
     
     if __name__ == '__main__':
         unittest.main()

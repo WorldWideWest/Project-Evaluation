@@ -70,6 +70,6 @@ class Parser():
             print(table)
             return periodsTable
         else:
-            return periodsTable    
+            return periodsTable, table
 
         
