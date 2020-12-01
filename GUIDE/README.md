@@ -87,7 +87,7 @@ The first return is a table wich is a baseline for the graph where we represent 
 
 We can represent this table with a graph wich gives us a better representation what is our IRR.
 
-<img src="images/graph.png">
+<img src="images/irrflow.png">
 
 And the last image is our calculation of the IRR. Here we can see where our project's don't have any return and are making losse's.
 
